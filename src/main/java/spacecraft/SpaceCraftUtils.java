@@ -14,7 +14,7 @@ public class SpaceCraftUtils {
     
 	private int x, y, z;
 	protected Direction direction;
-	protected Direction prevDirection = Direction.W;
+	protected Direction prevDirection;
 	
 	public SpaceCraftUtils(int x, int y, int z, Direction direction) {
         this.x = x;
@@ -174,6 +174,16 @@ public class SpaceCraftUtils {
 				break;
         }
     }
+    
+    public void turnUp() {
+        prevDirection=direction;
+        direction = Direction.Up;
+    }
+
+    public void turnDown() {
+        prevDirection=direction;
+        direction = Direction.Down;
+    }
 
     
     public void executeCommands(String[] commands) {
@@ -186,7 +196,11 @@ public class SpaceCraftUtils {
         		turnLeft();
         	} else if(command=="r") {
         		turnRight();
-        	}
+        	} else if(command=="u") {
+        		turnUp();
+        	} else if(command=="d") {
+        		turnDown();
+        	} 
         }
     }
 

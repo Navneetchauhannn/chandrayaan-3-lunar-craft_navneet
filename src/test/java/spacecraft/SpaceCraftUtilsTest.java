@@ -56,12 +56,41 @@ class SpaceCraftUtilsTest {
 		 String[] commands = {"r", "l", "r"};
 		 craft.executeCommands(commands);
 		 
-		 assertEquals(Direction.N, craft.getDirection(), "not turned");
+		 assertEquals(Direction.Down, craft.getDirection(), "not turned");
 		 
 		 craft = new SpaceCraftUtils(0, 0, 0, Direction.E);
 
 		 craft.executeCommands(commands);
 		 
 		 assertEquals(Direction.S, craft.getDirection(), "not turned");
+	}
+	
+	@Test
+	void turnUpDown() {
+		SpaceCraftUtils craft = new SpaceCraftUtils(0, 0, 0, Direction.W);
+		
+		 String[] commands = {"u", "d", "d"};
+		 craft.executeCommands(commands);
+		 
+		 assertEquals(Direction.Down, craft.getDirection(), "not turned");
+		 
+		 craft = new SpaceCraftUtils(0, 0, 0, Direction.Up);
+
+		 craft.executeCommands(commands);
+		 
+		 assertEquals(Direction.Down, craft.getDirection(), "not turned");
+	}
+	
+	@Test
+	void integratedTest() {
+		SpaceCraftUtils craft = new SpaceCraftUtils(0, 0, 0, Direction.N);
+		
+		 String[] commands = {"f", "r", "u", "b", "l"};
+		 craft.executeCommands(commands);
+		 
+		 assertEquals(0, craft.getX(), "x fails");
+		 assertEquals(1, craft.getY(), "y fails");
+		 assertEquals(-1, craft.getZ(), "z fails");
+		 assertEquals(Direction.N, craft.getDirection(), "not turned");
 	}
 }
